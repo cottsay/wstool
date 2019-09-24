@@ -1,4 +1,6 @@
 from setuptools import setup
+from setuptools import __version__ as setuptools_version
+from pkg_resources import parse_version
 from distutils.command.build import build
 from distutils.command.build_py import build_py
 
@@ -6,6 +8,11 @@ import os
 import sys
 import imp
 import argparse
+
+
+minimum_setuptools_version = '8.0'
+if parse_version(setuptools_version) < parse_version(minimum_setuptools_version):
+    sys.exit('This package requires at least setuptools ' + minimum_setuptools_version)
 
 
 with open('README.rst') as readme_file:
